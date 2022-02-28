@@ -6,9 +6,10 @@
     $mobile = $_GET['Mobile'];
     $regkit = $_GET['Regkit'];
     $room = $_GET['Room'];
-
-    $sql = "UPDATE checklist SET Momento = $momento, Regkit = $regkit, Room = $room WHERE Mobile = $mobile";
-
+    $roomnum = $_GET['RoomNo'];
+    if($roomnum == NULL) $roomnum = -1;
+    $sql = "UPDATE checklist SET Momento = $momento, Regkit = $regkit, Room = $room, RoomNo = $roomnum WHERE Mobile = $mobile";
+    echo $roomnum;
     echo $mobile;
 
     mysqli_query($conn, $sql);

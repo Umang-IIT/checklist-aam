@@ -70,7 +70,9 @@
 .Rtable .Rtable-row .Rtable-cell .Rtable-cell--content .webinar-date {
   font-weight: 700;
 }
-
+.Roomnum{
+  width: 100% !important;
+}
 /* Responsive
 ==================================== */
 @media all and (max-width: 750px) {

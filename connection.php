@@ -1,7 +1,7 @@
 <?php
-    $servername = "db4free.net:3306";
-    $username = "umangsingla617";
-    $password = "12345678";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
     $dbname = "grandreunion";
     
     // Create connection

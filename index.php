@@ -18,6 +18,7 @@
       <div class="Rtable-cell access-link-cell column-heading">Momento</div>
       <div class="Rtable-cell replay-link-cell column-heading">Reg-Kit</div>
       <div class="Rtable-cell pdf-cell column-heading">Room Allotment</div>
+      <div class="Rtable-cell pdf-cell column-heading">Room No.</div>
     </div> 
 
     <?php include './connection.php' ?>
@@ -37,6 +38,7 @@
           else $room = "";
           if($row['Regkit'] == 1) $regkit = 'checked';
           else $regkit = "";
+          $roomnum = $row['RoomNo']; 
           echo ('<div class="Rtable-row '.$strip.'">
                   <div class="Rtable-cell date-cell">
                     <div class="Rtable-cell--heading">Date</div>
@@ -60,6 +62,10 @@
                     <div class="Rtable-cell--heading">Checklist</div>
                     <div class="Rtable-cell--content pdf-content"><input class="Room" onchange="update_list(this)" type="checkbox"'.$room.'></div>
                   </div>
+                  <div class="Rtable-cell Rtable-cell--foot pdf-cell">
+                    <div class="Rtable-cell--heading">Room No.</div>
+                    <div class="Rtable-cell--content pdf-content"><input class="Roomnum" onchange="update_list(this)" type="text" value = '.$roomnum.'></div>
+                  </div>
                 </div>');
         $sno++;
         }
@@ -78,13 +84,15 @@
     var momento = child[3].children[1].children[0];
     var Regkit = child[4].children[1].children[0];
     var room = child[5].children[1].children[0];
-    console.log(Regkit,room);
+    var roomnumber = child[6].children[1].children[0];
+    console.log(Regkit,room, roomnumber.value);
     var xhr = new XMLHttpRequest();
-    let momento_check = 0,regkit_check=0,room_check =0;
+    let momento_check = 0,regkit_check=0,room_check =0, roomnum="";
     if(momento.checked == true) momento_check = 1;
     if(Regkit.checked == true) regkit_check = 1;
     if(room.checked == true) room_check = 1;
-
+     roomnum = roomnumber.value;
+      //  = roomnumber.value;  
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         console.log('done');
@@ -92,10 +100,10 @@
     };
 
     console.log(
-    "Utility/Update_checklist.php?Mobile=".concat(mobile).concat('&').concat('Momento=').concat(momento_check).concat('&').concat('Regkit=').concat(regkit_check).concat('&').concat('Room=').concat(room_check) 
+    "Utility/Update_checklist.php?Mobile=".concat(mobile).concat('&').concat('Momento=').concat(momento_check).concat('&').concat('Regkit=').concat(regkit_check).concat('&').concat('Room=').concat(room_check).concat('&').concat('RoomNo=').concat(roomnum)
     );
 
-    url = "Utility/Update_checklist.php?Mobile=".concat(mobile).concat('&').concat('Momento=').concat(momento_check).concat('&').concat('Regkit=').concat(regkit_check).concat('&').concat('Room=').concat(room_check) ;
+    url = "Utility/Update_checklist.php?Mobile=".concat(mobile).concat('&').concat('Momento=').concat(momento_check).concat('&').concat('Regkit=').concat(regkit_check).concat('&').concat('Room=').concat(room_check).concat('&').concat('RoomNo=').concat(roomnum) ;
 
     xhr.open("GET",url);
     xhr.send();
